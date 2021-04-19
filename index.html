@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    <title>Document</title>
+    <script>
+        function allowDrop(ev) {
+          ev.preventDefault();
+        }
+        
+        function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.id);
+        }
+        
+        function drop(ev) {
+          ev.preventDefault();
+          var data = ev.dataTransfer.getData("text");
+          console.log(data);
+          var sum= parseInt(document.getElementById("parrafo1").innerHTML);
+          if(data=='drag1'){
+            document.getElementById("parrafo1").innerHTML = sum+10;
+          }else if(data=='drag2'){
+            document.getElementById("parrafo1").innerHTML =sum+20;
+          }else{
+            document.getElementById("parrafo1").innerHTML =sum+50;
+          }
+          ev.target.appendChild(document.getElementById(data));
+        }
+        function dropleft(ev){
+          ev.preventDefault();
+          var data = ev.dataTransfer.getData("text");
+          var sum= parseInt(document.getElementById("parrafo1").innerHTML);
+          if(data=='drag1'){
+            document.getElementById("parrafo1").innerHTML = sum-10;
+          }else if(data=='drag2'){
+            document.getElementById("parrafo1").innerHTML =sum-20;
+          }else{
+            document.getElementById("parrafo1").innerHTML =sum-50;
+          }
+          ev.target.appendChild(document.getElementById(data));
+        }
+        </script>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">Reto 2 Bootcamp</header>
+        <article id="leftside" class="main" ondrop="dropleft(event)" ondragover="allowDrop(event)">
+            <div id="div1">
+                <img src="assets/images/programador2.svg" draggable="true" ondragstart="drag(event)" id="drag1" width="100" height="50">
+            </div>  
+            <div id="div1">
+                <img src="assets/images/programador2.svg" draggable="true" ondragstart="drag(event)" id="drag2" width="100" height="50">
+            </div> 
+            <div id="div1">
+                <img src="assets/images/programador2.svg" draggable="true" ondragstart="drag(event)" id="drag3" width="100" height="50">
+            </div> 
+        </article>
+        <aside class="aside aside-2">
+            <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <p id="parrafo">Precio: </p>
+            <p id="parrafo1">0</p>
+        </aside>
+        <footer class="footer">Footer</footer>
+      </div>
+</div>
+</body>
+</html>
